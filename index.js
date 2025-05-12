@@ -5,7 +5,7 @@ puppeteerExtra.use(Stealth());
 
 const disableFilters = true;
 
-export default async function scraper(business, place) {
+export default async function scraper(business, place, limit) {
   const query = queryBuilder(business + " in " + place);
   const browserObj = await puppeteerExtra.launch({
     headless: true,
@@ -102,6 +102,7 @@ export default async function scraper(business, place) {
           address,
           category,
         });
+
         console.log({
           name,
           phoneNumber,
@@ -110,6 +111,9 @@ export default async function scraper(business, place) {
           address,
           category,
         });
+        if (data.length >= limit) {
+          return data;
+        }
       } else {
         if (phoneNumber && !phoneNumber.startsWith("+44 7")) {
           phoneNumber = null;

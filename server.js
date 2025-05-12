@@ -17,10 +17,10 @@ app.get("/", async (req, res) => {
 
 app.get("/api/Gmaps", async (req, res) => {
   try {
-    const { business, place } = req.query;
+    const { business, place, limit } = req.query;
     console.log(business, place);
 
-    const data = await scraper(business, place); // Call your scraper function
+    const data = await scraper(business, place, limit); // Call your scraper function
 
     res.json({ success: true, data }); // Send response
   } catch (error) {
