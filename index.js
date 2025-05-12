@@ -112,6 +112,7 @@ export default async function scraper(business, place, limit) {
           category,
         });
         if (data.length >= limit) {
+          await browserObj.close();
           return data;
         }
       } else {
